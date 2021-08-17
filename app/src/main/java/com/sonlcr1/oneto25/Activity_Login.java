@@ -27,6 +27,8 @@ public class Activity_Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+//        getSupportActionBar().hide();
+
         ImageButton_Google = findViewById(R.id.ImageButton_Google);
         ImageButton_Kakao = findViewById(R.id.ImageButton_Kakao);
         ImageButton_Naver = findViewById(R.id.ImageButton_Naver);

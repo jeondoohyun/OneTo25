@@ -59,7 +59,7 @@ public class Activity_Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
 
 
         drawer_view = findViewById(R.id.drawer_view);
