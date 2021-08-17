@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity_Login">
+
+    <TextView
+        android:id="@+id/TextView_Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="로그인 후에 랭킹에 도전하세요!"
+        android:textSize="18dp"
+        android:textColor="@color/colorBlack"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.15"/>
+
+    <TextView
+        android:id="@+id/TextView_SimpleLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="간편 로그인"
+        android:textSize="18dp"
+        android:textColor="@color/colorBlack"
+        android:gravity="center_horizontal"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/ImageButton_Google"
+        android:onClick="clickLogin"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/login_google"
+        android:layout_marginRight="15dp"
+        app:layout_constraintRight_toLeftOf="@id/ImageButton_Kakao"
+        app:layout_constraintTop_toTopOf="@id/ImageButton_Kakao"
+        />
+
+    <ImageButton
+        android:id="@+id/ImageButton_Kakao"
+        android:onClick="clickLogin"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/login_kakao"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/TextView_SimpleLogin" />
+
+    <ImageButton
+        android:id="@+id/ImageButton_Naver"
+        android:onClick="clickLogin"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/login_naver"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintLeft_toRightOf="@id/ImageButton_Kakao"
+        app:layout_constraintTop_toTopOf="@id/ImageButton_Kakao"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

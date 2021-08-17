@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "100229492850",
+    "project_id": "oneto25-410b4",
+    "storage_bucket": "oneto25-410b4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100229492850:android:b121d37e3d7c1e309452eb",
+        "android_client_info": {
+          "package_name": "com.sonlcr1.oneto25"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "100229492850-gjglqu4h58me794mca9t8d6vkq41kbeq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDl8n8hyl5rA-n2bK3_iNWH8swJpBZ73Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100229492850-gjglqu4h58me794mca9t8d6vkq41kbeq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

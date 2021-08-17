@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class MainActivity extends AppCompatActivity {
+public class Activity_Main extends AppCompatActivity {
 
     DrawerLayout drawer_view;
     LinearLayout LinearLayout_main;
@@ -89,11 +90,12 @@ public class MainActivity extends AppCompatActivity {
         //xml에서 각 Button을 눌렀을때 Activity의 특정 메소드를
         //자동으로 발동하도록 하는 속성을 추가
 
-        ImageButton_menu.setOnClickListener((v) -> {
-            if (!drawer_view.isDrawerOpen(GravityCompat.START)) {
-                drawer_view.openDrawer(GravityCompat.START);
-            }
-        });
+//        ImageButton_menu.setOnClickListener((v) -> {
+//            if (!drawer_view.isDrawerOpen(GravityCompat.START)) {
+//                drawer_view.openDrawer(GravityCompat.START);
+//            }
+//        });
+
 
         drawer_view.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
@@ -103,14 +105,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onDrawerOpened(@NonNull View drawerView) {
-                Toast.makeText(MainActivity.this, "열림", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Activity_Main.this, "열림", Toast.LENGTH_SHORT).show();
                 LinearLayout_main.setClickable(false);
                 flag_drawer_state = DRAWER_OPEN;
             }
 
             @Override
             public void onDrawerClosed(@NonNull View drawerView) {
-                Toast.makeText(MainActivity.this, "닫힘", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Activity_Main.this, "닫힘", Toast.LENGTH_SHORT).show();
                 LinearLayout_main.setClickable(true);
                 flag_drawer_state = DRAWER_CLOSE;
             }
@@ -121,11 +123,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        TextView_Menu_MyRecord.setOnClickListener((v) -> {
-            Toast.makeText(this, "ㅎㅎㅎ", Toast.LENGTH_SHORT).show();
-        });
+        ImageButton_menu.setOnClickListener(clickListener);
+        TextView_Menu_Login.setOnClickListener(clickListener);
 
     }//onCreate method...
+
+    View.OnClickListener clickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.ImageButton_menu:
+                    if (!drawer_view.isDrawerOpen(GravityCompat.START)) {
+                        drawer_view.openDrawer(GravityCompat.START);
+                    }
+                    break;
+                case R.id.TextView_Menu_Login:
+                    startActivity(new Intent(Activity_Main.this, Activity_Login.class));
+                    break;
+            }
+        }
+    };
 
     @Override
     public void onBackPressed() {
@@ -133,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
             drawer_view.closeDrawer(GravityCompat.START);
             flag_drawer_state = DRAWER_CLOSE;
         } else {
-            AlertDialog.Builder ab = new AlertDialog.Builder(MainActivity.this);
+            AlertDialog.Builder ab = new AlertDialog.Builder(Activity_Main.this);
             ab.setMessage("종료 하시겠습니까?")
                     .setNegativeButton("확인", (dialogInterface, i) -> finishAffinity())
                     .setPositiveButton("취소",null)
