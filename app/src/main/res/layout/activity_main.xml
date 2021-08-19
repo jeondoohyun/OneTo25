@@ -305,15 +305,33 @@
                 android:layout_weight="2"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/TextView_count"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorMain"
-                    android:gravity="center"/>
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="다음번호"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBlack"/>
+
+                    <TextView
+                        android:id="@+id/TextView_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="25dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorMain"
+                        android:layout_marginLeft="10dp"/>
+
+                </LinearLayout>
+
+
 
                 <TextView
                     android:id="@+id/TextView_Record"
@@ -390,21 +408,10 @@
                 android:layout_margin="10dp"/>
 
             <TextView
-                android:id="@+id/TextView_Menu_Login"
+                android:id="@+id/TextView_Menu_LoginOrOut"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="로그인"
-                android:textStyle="bold"
-                android:textSize="17dp"
-                android:textColor="@color/colorBlack"
-                android:gravity="center_vertical"
-                android:paddingLeft="30dp"/>
-
-            <TextView
-                android:id="@+id/TextView_Menu_Logout"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:text="로그아웃"
                 android:textStyle="bold"
                 android:textSize="17dp"
                 android:textColor="@color/colorBlack"
@@ -420,7 +427,7 @@
                 android:textSize="17dp"
                 android:textColor="@color/colorBlack"
                 android:gravity="center_vertical"
-                android:paddingLeft="30dp"/>
+                android:paddingLeft="30dp" />
 
 
 
