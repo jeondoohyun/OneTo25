@@ -23,10 +23,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Activity_Main extends AppCompatActivity {
 
@@ -427,6 +437,7 @@ public class Activity_Main extends AppCompatActivity {
                 if ( editor.commit() ) {
                     Toast.makeText(this, "신기록 달성!", Toast.LENGTH_SHORT).show();
                     getRecord();
+                    serverRecordUpdate();
                 }
             }
         } else if (flag_game_mode == MODE_50) {
@@ -443,6 +454,7 @@ public class Activity_Main extends AppCompatActivity {
                 if ( editor.commit() ) {
                     Toast.makeText(this, "신기록 달성!", Toast.LENGTH_SHORT).show();
                     getRecord();
+                    serverRecordUpdate();
                 }
             }
         }
@@ -454,6 +466,45 @@ public class Activity_Main extends AppCompatActivity {
         record_50 = pref_record.getString(SAVE_50,"");
 
         Log.e("record:25, 50", record_25+", "+record_50);
+    }
+    
+    public void serverRecordUpdate() {
+        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+        CollectionReference userRef = null;
+        final Map<String, Object> user = new HashMap<>();
+        if (flag_game_mode == MODE_25) {
+            user.put("id", "sonlcr1@naver.com");    // 로그인 정보 불러오는 기능이 아직 없어서 임시 하드코딩
+            user.put("record", record_25);
+            
+            userRef = firebaseFirestore.collection("MODE25");
+        } else if (flag_game_mode == MODE_50) {
+            user.put("id", "sonlcr1@naver.com");    // 로그인 정보 불러오는 기능이 아직 없어서 임시 하드코딩
+            user.put("record", record_50);
+            
+            userRef = firebaseFirestore.collection("MODE50");
+        }
+
+        CollectionReference finalUserRef = userRef;
+        userRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                QuerySnapshot snapshots = task.getResult();
+                if (snapshots.size() > 0) {
+                    for (QueryDocumentSnapshot snapshot : snapshots) {
+                        Map<String,Object> user = snapshot.getData();
+                        if (user.get("id").equals("sonlcr1@naver.com")) {   // 로그인 정보 불러오는 기능이 아직 없어서 임시 하드코딩
+                            snapshot.getReference().delete();
+                        }
+                    }
+                }
+                finalUserRef.add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Toast.makeText(Activity_Main.this, "saved", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 
 }//MainActivity class...
