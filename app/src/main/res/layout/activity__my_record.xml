@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity_MyRecord">
+
+    <TextView
+        android:id="@+id/TextView_Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="내 최고 기록"
+        android:textSize="18dp"
+        android:textColor="@color/colorBlack"
+        android:paddingLeft="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.05"/>
+
+    <TextView
+        android:id="@+id/TextView_1to25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1 to 25"
+        android:textSize="30dp"
+        app:layout_constraintTop_toBottomOf="@id/TextView_Title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"/>
+
+    <TextView
+        android:id="@+id/TextView_1to25_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintBaseline_toBaselineOf="@id/TextView_1to25"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="20dp"/>
+
+    <TextView
+        android:id="@+id/TextView_1to50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1 to 50"
+        android:textSize="30dp"
+        app:layout_constraintTop_toBottomOf="@id/TextView_1to25"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"/>
+
+    <TextView
+        android:id="@+id/TextView_1to50_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintBaseline_toBaselineOf="@id/TextView_1to50"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="20dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,6 +45,16 @@
                     android:fontFamily="cursive"
                     android:layout_gravity="center"/>
 
+                <TextView
+                    android:id="@+id/TextView_GameMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:textSize="16dp"
+                    android:text="1to25"
+                    android:textStyle="bold"
+                    android:layout_marginRight="10dp"/>
+
             </FrameLayout>
 
 
@@ -382,7 +392,7 @@
                 android:id="@+id/TextView_Menu_MyRecord"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="내 기록"
+                android:text="내 최고 기록"
                 android:textStyle="bold"
                 android:textSize="17dp"
                 android:textColor="@color/colorBlack"
@@ -395,6 +405,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="랭킹 확인"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:textColor="@color/colorBlack"
+                android:gravity="center_vertical"
+                android:paddingLeft="30dp"/>
+
+            <TextView
+                android:id="@+id/TextView_Mode_Change"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="모드 변경"
                 android:textStyle="bold"
                 android:textSize="17dp"
                 android:textColor="@color/colorBlack"
