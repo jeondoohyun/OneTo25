@@ -43,6 +43,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
 
     implementation 'com.android.support:multidex:1.0.3'         // Error: null, Cannot fit requested classes in a single dex file (# methods: 89715 > 65536) dex 는 65536 클래스까지 할당가능, 65536이 넘어가면 multiindex써야함
 }

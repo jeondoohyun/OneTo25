@@ -19,11 +19,20 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecyclerView_Rank"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/TabLayout_tab"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"/>
+        android:layout_height="wrap_content"
+        app:tabTextColor="@color/colorGray"
+        app:tabSelectedTextColor="@color/colorBlack"
+        app:tabIndicatorHeight="3dp"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        app:tabIndicatorFullWidth="false"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/ViewPager_Rank"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
