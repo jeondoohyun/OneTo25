@@ -14,7 +14,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     public ViewPagerAdapter(@NonNull FragmentManager fm) {
         super(fm);
-        fragments[0] = new Tab1Fragment();
+        fragments[0] = new Tab1Fragment(fm);
         fragments[1] = new Tab2Fragment();
     }
 

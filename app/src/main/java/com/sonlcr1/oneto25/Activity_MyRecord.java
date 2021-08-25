@@ -1,6 +1,8 @@
 package com.sonlcr1.oneto25;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,6 +16,10 @@ public class Activity_MyRecord extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__my_record);
+
+//        DialogFragment loading = new Dialog_Loading();
+//        FragmentManager fm = getSupportFragmentManager();
+//        loading.show(fm,"");
 
         TextView TextView_1to25_record = findViewById(R.id.TextView_1to25_record);
         TextView TextView_1to50_record = findViewById(R.id.TextView_1to50_record);
