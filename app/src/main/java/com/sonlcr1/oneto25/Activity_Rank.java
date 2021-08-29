@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewTreeObserver;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -33,22 +34,11 @@ public class Activity_Rank extends AppCompatActivity {
         ViewPager_Rank.setAdapter(viewPagerAdapter);
         TabLayout_tab.setupWithViewPager(ViewPager_Rank);
 
-
-
-        ViewPager_Rank.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+        ViewPager_Rank.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
-            public void onViewAttachedToWindow(View view) {
+            public void onGlobalLayout() {
                 loading.dismiss();
             }
-
-            @Override
-            public void onViewDetachedFromWindow(View view) {
-
-            }
         });
-
-
-
-
     }
 }

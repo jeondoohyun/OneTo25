@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,8 +42,15 @@ public class Tab1Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab1,container,false);   //false 리턴할때 붙이니까 false
         RecyclerView_1to25 = view.findViewById(R.id.RecyclerView_1to25);
+        RelativeLayout ParentLayout =(RelativeLayout)view.findViewById(R.id.ParentLayout);
+
+
 
         DialogFragment loading = new Dialog_Loading();
+
+        
+        // todo : view pager에 progress dialog 생성하는거 알아볼것
+//        ParentLayout.addView(loading);
         loading.show(fm,"");
 
         ArrayList<VO_Rank> arrayList = new ArrayList<>();
@@ -95,4 +103,6 @@ public class Tab1Fragment extends Fragment {
 
         return view; //리턴될때 알아서 붙지만 inflate 두번째 파라미터 container로 씀으로 사이즈를 미리 알수 있다.
     }
+
+
 }
