@@ -473,15 +473,19 @@ public class Activity_Main extends AppCompatActivity {
         CollectionReference userRef = null;
         final Map<String, Object> user = new HashMap<>();
         if (flag_game_mode == MODE_25) {
-            user.put("id", "sonlcr1@naver.com");    // 로그인 정보 불러오는 기능이 아직 없어서 임시 하드코딩
-            user.put("record", record_25);
-            
-            userRef = firebaseFirestore.collection("MODE25");
+            if (mAuth.getCurrentUser() != null) {
+                user.put("id", mAuth.getCurrentUser().getEmail());    // 로그인 정보 불러오는 기능이 아직 없어서 임시 하드코딩
+                user.put("record", record_25.substring(0,2)+":"+record_25.substring(2,4)+":"+record_25.substring(4,6));
+                userRef = firebaseFirestore.collection("MODE25");
+            }
+
         } else if (flag_game_mode == MODE_50) {
-            user.put("id", "sonlcr1@naver.com");    // 로그인 정보 불러오는 기능이 아직 없어서 임시 하드코딩
-            user.put("record", record_50);
-            
-            userRef = firebaseFirestore.collection("MODE50");
+            if (mAuth.getCurrentUser() != null) {
+                user.put("id", mAuth.getCurrentUser().getEmail());      // 로그인 정보 불러오는 기능이 아직 없어서 임시 하드코딩
+                user.put("record", record_50);
+
+                userRef = firebaseFirestore.collection("MODE50");
+            }
         }
 
         CollectionReference finalUserRef = userRef;
@@ -492,7 +496,7 @@ public class Activity_Main extends AppCompatActivity {
                 if (snapshots.size() > 0) {
                     for (QueryDocumentSnapshot snapshot : snapshots) {
                         Map<String,Object> user = snapshot.getData();
-                        if (user.get("id").equals("sonlcr1@naver.com")) {   // 로그인 정보 불러오는 기능이 아직 없어서 임시 하드코딩
+                        if (user.get("id").equals(mAuth.getCurrentUser().getEmail())) {   // 로그인 정보 불러오는 기능이 아직 없어서 임시 하드코딩
                             snapshot.getReference().delete();
                         }
                     }

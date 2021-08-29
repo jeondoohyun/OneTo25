@@ -29,12 +29,27 @@ import java.util.Comparator;
 import java.util.Map;
 
 public class Tab1Fragment extends Fragment {
+    private static FragmentManager fm;
     RecyclerView RecyclerView_1to25;
     RecyclerAdapter_Rank recyclerAdapterRank;
-    FragmentManager fm;
 
     public Tab1Fragment (FragmentManager fm) {
         this.fm = fm;
+    }
+
+    public static Tab1Fragment newInstance(int index) {
+        Tab1Fragment f = new Tab1Fragment(fm);
+
+        // Supply index input as an argument.
+        Bundle args = new Bundle();
+        args.putInt("index", index);
+        f.setArguments(args);
+
+        return f;
+    }
+
+    public int getShownIndex() {
+        return getArguments().getInt("index", 0);
     }
 
     @Nullable
@@ -46,12 +61,15 @@ public class Tab1Fragment extends Fragment {
 
 
 
-        DialogFragment loading = new Dialog_Loading();
+//        Dialog_Loading loading = (Dialog_Loading) DialogFragment.instantiate(getActivity(),"Dialog_Loading");
+//        loading.show(fm,"loading");
 
+        DialogFragment dialogFragment = new Dialog_Loading ();
+        dialogFragment.show(fm,"Dialog_Loading");
         
-        // todo : view pager에 progress dialog 생성하는거 알아볼것
+        // todo : fragment에서 dialogFragment 생성시 gif 배경이 흰색으로 나옴.
 //        ParentLayout.addView(loading);
-        loading.show(fm,"");
+//        loading.show(fm,"");
 
         ArrayList<VO_Rank> arrayList = new ArrayList<>();
 
@@ -72,7 +90,7 @@ public class Tab1Fragment extends Fragment {
                         String name = (String)user.get("id");
 //                        int age = (int)user.get("age"); //int로 했을때 뜨는 에러 해석해보자
 //                        long age = (long)user.get("age");
-                        int record = Integer.parseInt(user.get("record").toString());
+                        int record = Integer.parseInt(user.get("record").toString().replace(":",""));
 
 //                        buffer.append(name+"\n"+age+"\n"+address+"\n===========\n");
                         arrayList.add(new VO_Rank(name, record));
@@ -94,12 +112,14 @@ public class Tab1Fragment extends Fragment {
                         Log.e("데이터",e.email+", "+e.record);
                     }
 
+                    // todo : 서버에서 가져온 랭킹 데이터를 오름차순으로 나열수 int 기록값을 string 00:00:00 포맷형식으로 바꾸어 recyclerview에 보여줄것.
                     recyclerAdapterRank = new RecyclerAdapter_Rank(getContext(), arrayList);
                     RecyclerView_1to25.setAdapter(recyclerAdapterRank);
+                    dialogFragment.dismiss();
                 }
             }
         });
-        loading.dismiss();
+
 
         return view; //리턴될때 알아서 붙지만 inflate 두번째 파라미터 container로 씀으로 사이즈를 미리 알수 있다.
     }

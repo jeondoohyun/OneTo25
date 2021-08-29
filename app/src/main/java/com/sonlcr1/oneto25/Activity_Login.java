@@ -1,5 +1,7 @@
 package com.sonlcr1.oneto25;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,9 +17,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 import static com.sonlcr1.oneto25.Activity_Main.mAuth;
 
@@ -64,10 +75,26 @@ public class Activity_Login extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);
+            } catch (ApiException e) {
+            }
+        }
+    }
+
     public void clickLogin(View view) {
         switch (view.getId()) {
             case R.id.ImageButton_Google:
-                Toast.makeText(this, "구글로그인", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "구글로그인", Toast.LENGTH_SHORT).show();
+                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                startActivityForResult(signInIntent, RC_SIGN_IN);
                 break;
             case R.id.ImageButton_Kakao:
                 Toast.makeText(this, "카카오로그인", Toast.LENGTH_SHORT).show();
@@ -79,7 +106,7 @@ public class Activity_Login extends AppCompatActivity {
     }
 
     public void emailLogin() {
-        if ( !TextUtils.isEmpty(EditText_email.getText().toString()) && !TextUtils.isEmpty(EditText_password.getText().toString())) {
+        if (!TextUtils.isEmpty(EditText_email.getText().toString()) && !TextUtils.isEmpty(EditText_password.getText().toString())) {
             mAuth.signInWithEmailAndPassword(EditText_email.getText().toString(), EditText_password.getText().toString())
                     .addOnCompleteListener((task) -> {
                         if (task.isSuccessful()) {
@@ -92,6 +119,36 @@ public class Activity_Login extends AppCompatActivity {
                     });
         } else {
             Toast.makeText(this, "이메일 및 비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Toast.makeText(Activity_Login.this, "로그인성공", Toast.LENGTH_SHORT).show();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(Activity_Login.this, "로그인실패", Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    }
+                });
+    }
+
+    private void updateUI(FirebaseUser user) { //update ui code here
+        if (user != null) {
+            Intent intent = new Intent(this, Activity_Main.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
         }
     }
 
