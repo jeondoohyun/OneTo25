@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-import android.view.View;
 import android.view.ViewTreeObserver;
 
 import com.google.android.material.tabs.TabLayout;
@@ -25,7 +24,7 @@ public class Activity_Rank extends AppCompatActivity {
 
         fm = getSupportFragmentManager();
 
-        loading = new Dialog_Loading();
+        loading = new Dialog_LoadingFrag();
         loading.show(fm,"");
 
         TabLayout_tab = findViewById(R.id.TabLayout_tab);

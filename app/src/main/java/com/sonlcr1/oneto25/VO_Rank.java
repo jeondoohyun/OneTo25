@@ -2,11 +2,13 @@ package com.sonlcr1.oneto25;
 
 public class VO_Rank {
     String email;
-    int record;
+    int int_record;
+    String st_record;
+
 
     public VO_Rank(String email, int record) {
         this.email = email;
-        this.record = record;
+        this.int_record = record;
     }
 
     public String getEmail() {
@@ -18,10 +20,10 @@ public class VO_Rank {
     }
 
     public int getRecord() {
-        return record;
+        return int_record;
     }
 
     public void setRecord(int record) {
-        this.record = record;
+        this.int_record = record;
     }
 }

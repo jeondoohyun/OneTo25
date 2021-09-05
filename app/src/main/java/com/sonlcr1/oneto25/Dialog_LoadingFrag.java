@@ -17,9 +17,9 @@ import androidx.fragment.app.DialogFragment;
 
 import com.bumptech.glide.Glide;
 
-public class Dialog_Loading extends DialogFragment {
+public class Dialog_LoadingFrag extends DialogFragment {
 
-    public Dialog_Loading() { }
+    public Dialog_LoadingFrag() { }
 
     @SuppressLint("ResourceAsColor")
     @Nullable
@@ -29,6 +29,7 @@ public class Dialog_Loading extends DialogFragment {
         LayoutInflater inflater2 = getActivity().getLayoutInflater();
         View view = inflater2.inflate(R.layout.dialog_loading, null);
 
+        view.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 //        view.setBackground(new ColorDrawable(Color.TRANSPARENT));
 //        view.setBackgroundColor(android.R.color.transparent);
 

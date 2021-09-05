@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,39 +36,14 @@ public class Tab1Fragment extends Fragment {
         this.fm = fm;
     }
 
-    public static Tab1Fragment newInstance(int index) {
-        Tab1Fragment f = new Tab1Fragment(fm);
-
-        // Supply index input as an argument.
-        Bundle args = new Bundle();
-        args.putInt("index", index);
-        f.setArguments(args);
-
-        return f;
-    }
-
-    public int getShownIndex() {
-        return getArguments().getInt("index", 0);
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab1,container,false);   //false 리턴할때 붙이니까 false
         RecyclerView_1to25 = view.findViewById(R.id.RecyclerView_1to25);
-        RelativeLayout ParentLayout =(RelativeLayout)view.findViewById(R.id.ParentLayout);
 
-
-
-//        Dialog_Loading loading = (Dialog_Loading) DialogFragment.instantiate(getActivity(),"Dialog_Loading");
-//        loading.show(fm,"loading");
-
-        DialogFragment dialogFragment = new Dialog_Loading ();
-        dialogFragment.show(fm,"Dialog_Loading");
-        
-        // todo : fragment에서 dialogFragment 생성시 gif 배경이 흰색으로 나옴.
-//        ParentLayout.addView(loading);
-//        loading.show(fm,"");
+        ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.show();
 
         ArrayList<VO_Rank> arrayList = new ArrayList<>();
 
@@ -108,14 +82,19 @@ public class Tab1Fragment extends Fragment {
                                 return -1;
                         }
                     });
+                    int count = 0;
                     for (VO_Rank e : arrayList) {
-                        Log.e("데이터",e.email+", "+e.record);
+                        String result = String.format("%06d",e.int_record);
+                        arrayList.get(count).st_record = result.substring(0,2)+":"+result.substring(2,4)+":"+result.substring(4,6);
+                        count++;
+                        Log.e("데이터",e.email+", "+e.st_record);
                     }
 
                     // todo : 서버에서 가져온 랭킹 데이터를 오름차순으로 나열수 int 기록값을 string 00:00:00 포맷형식으로 바꾸어 recyclerview에 보여줄것.
                     recyclerAdapterRank = new RecyclerAdapter_Rank(getContext(), arrayList);
                     RecyclerView_1to25.setAdapter(recyclerAdapterRank);
-                    dialogFragment.dismiss();
+//                    dialogFragment.dismiss();
+                    progressDialog.dismiss();
                 }
             }
         });

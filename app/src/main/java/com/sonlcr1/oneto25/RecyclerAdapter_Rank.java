@@ -55,7 +55,7 @@ public class RecyclerAdapter_Rank extends RecyclerView.Adapter {
         }
 
         vh.TextView_recy_email.setText(item.email);
-        vh.TextView_recy_record.setText(item.record+"");
+        vh.TextView_recy_record.setText(item.st_record+"");
     }
 
     @Override
