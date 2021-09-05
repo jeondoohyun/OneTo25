@@ -58,6 +58,8 @@ public class Activity_Signup extends AppCompatActivity {
                         Toast.makeText(this, "비밀번호를 6자리 이상으로 설정하세요", Toast.LENGTH_SHORT).show();
                     } else if (exception.contains("FirebaseAuthUserCollisionException")) {
                         Toast.makeText(this, "이메일이 이미 존재합니다.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.e("문제","진입");
                     }
                     Log.e("Singup",task.getException().toString());
                 }
